@@ -1,0 +1,39 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+revisionHistoryLimit: 1
+image:
+  repository: mycluster.icp:8500/default
+  name: notification-slack
+  tag: latest
+  pullPolicy: Always
+  containerPort:
+    http: 9080
+    https: 9443
+  resources:
+    requests:
+      cpu: 200m
+      memory: 300Mi
+service:
+  # Change this to ClusterIP before releasing charts so microservices can only be reached through the ingress
+  type: NodePort
+  servicePort:
+    http: 9080
+    https: 9443
+secret:
+  openwhisk:
+    create: false
+    secret_name: stocktrader-openwhisk
+    # url: https://openwhisk.ng.bluemix.net/api/v1/namespaces/jalcorn%40us.ibm.com_dev/actions/PostLoyaltyLevelToSlack
+    url: aHR0cHM6Ly9vcGVud2hpc2submcuYmx1ZW1peC5uZXQvYXBpL3YxL25hbWVzcGFjZXMvamFsY29ybiU0MHVzLmlibS5jb21fZGV2L2FjdGlvbnMvUG9zdExveWFsdHlMZXZlbFRvU2xhY2s=
+    # id: bc2b0a37-0554-4658-9ebe-ae068eb1aa22
+    id: YmMyYjBhMzctMDU1NC00NjU4LTllYmUtYWUwNjhlYjFhYTIy
+    # pwd: 45t2FZC1q1bv6OYUztZUjkYFaVNs5klaviHoE6gFvgEedu9akiE1YW6lChOxUgJb
+    pwd: NDV0MkZaQzFxMWJ2Nk9ZVXp0WlVqa1lGYVZOczVrbGF2aUhvRTZnRnZnRWVkdTlha2lFMVlXNmxDaE94VWdKYg==
+  jwt:
+    create: false
+    secret_name: stocktrader-jwt
+    # audience: stock-trader
+    audience: c3RvY2stdHJhZGVy
+    # issuer: http://stock-trader.ibm.com
+    issuer: aHR0cDovL3N0b2NrLXRyYWRlci5pYm0uY29t
