@@ -16,7 +16,7 @@ image:
       memory: 300Mi
 service:
   # Change this to ClusterIP before releasing charts so microservices can only be reached through the ingress
-  type: NodePort
+  type: ClusterIP
   servicePort:
     http: 9080
     https: 9443
